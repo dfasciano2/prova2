@@ -2405,15 +2405,21 @@ public class AIDomination extends AISubmissive {
      * 2. Move the most troops to the battle from a non-front country.
      * 3. just move from the interior - however this doesn't yet make a smart choice.
      */
+    public target_null() {
+
+        List<EliminationTarget> co = findTargetContinents(gs, Collections.EMPTY_MAP, false, false);
+        targetContinents = new ArrayList<Continent>();
+        for (int k = 0; k < co.size(); k++) {
+            EliminationTarget et = co.get(k);
+            targetContinents.add(et.co);
+        }
+    
+    }
+    
     public if_check_operations() {
     	 if (targetContinents == null) {
-             List<EliminationTarget> co = findTargetContinents(gs, Collections.EMPTY_MAP, false, false);
-             targetContinents = new ArrayList<Continent>();
-             for (int k = 0; k < co.size(); k++) {
-                 EliminationTarget et = co.get(k);
-                 targetContinents.add(et.co);
-             }
-         }
+    		 target_null();
+    	 }
          int index = targetContinents.indexOf(c.getContinent());
          if (index == -1 && c.getContinent().getOwner() == player) {
              break;
@@ -2450,6 +2456,13 @@ public class AIDomination extends AISubmissive {
     
     }
     
+    public cooperation_check() {
+    	if (c.getArmies() > 2 && gs.commonThreat != null && c.getCrossContinentNeighbours().size() > 0 && !ownsNeighbours(c)) {
+            for (int j = 0; j < c.getNeighbours().size(); j++) {
+            	check_cooperations();
+            }
+        }
+    }
     
     public move_battle() {
 
@@ -2458,11 +2471,7 @@ public class AIDomination extends AISubmissive {
             continue;
         }
         //cooperation check to see if we should leave this continent
-        if (c.getArmies() > 2 && gs.commonThreat != null && c.getCrossContinentNeighbours().size() > 0 && !ownsNeighbours(c)) {
-            for (int j = 0; j < c.getNeighbours().size(); j++) {
-            	check_cooperations();
-            }
-        }
+        cooperation_check();
         if (v.contains(c) && additionalTroopsNeeded(c, gs)/2 + getMinPlacement() >= 0) {
             continue;
         }
@@ -2655,6 +2664,22 @@ public class AIDomination extends AISubmissive {
     
     }
     
+    public determinate_update_attack() {
+    	 for (int j = 0; j < t.size(); j++) {
+         	available_attack();
+         }
+         int reenforcements = Math.max(3, player2.getNoTerritoriesOwned()/3) + cardEstimate;
+         if (reenforcements > 8 && strategic) {
+             reenforcements *= 1.3;
+         }
+         int attack = attackable + reenforcements;
+         HashSet<Continent> owned = new HashSet<Continent>();
+         //update the attack and player value for the continents owned
+         for (int j = 0; j < g.owned.length; j++) {
+         	attack_update();
+         }
+    }
+    
     public get_players() {
 
         Player player2 = players.get((index + i)%players.size());
@@ -2673,19 +2698,10 @@ public class AIDomination extends AISubmissive {
             strategicCount++;
         }
         //determine what is available to attack with, discounting if land locked
-        for (int j = 0; j < t.size(); j++) {
-        	available_attack();
-        }
-        int reenforcements = Math.max(3, player2.getNoTerritoriesOwned()/3) + cardEstimate;
-        if (reenforcements > 8 && strategic) {
-            reenforcements *= 1.3;
-        }
-        int attack = attackable + reenforcements;
-        HashSet<Continent> owned = new HashSet<Continent>();
-        //update the attack and player value for the continents owned
-        for (int j = 0; j < g.owned.length; j++) {
-        	attack_update();
-        }
+       
+        determinate_update_attack();
+        
+        
         ps.strategic = strategic;
         ps.armies = noArmies;
         ps.owned = owned;
