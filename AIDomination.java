@@ -2416,11 +2416,7 @@ public class AIDomination extends AISubmissive {
     
     }
     public other_if() {
-    	 int index = targetContinents.indexOf(c.getContinent());
-         if (index == -1 && c.getContinent().getOwner() == player) {
-             break;
-         }
-         int indexOther = targetContinents.indexOf(n.getContinent());
+    	 
          if ((indexOther > -1 && (index == -1 || index > indexOther)) || ((index == -1 || index > 0) && n.getContinent().getOwner() == player)) {
              int toSend = c.getArmies() - getMinPlacement();
              return getMoveCommand(c, n, toSend);
@@ -2431,6 +2427,11 @@ public class AIDomination extends AISubmissive {
     	 if (targetContinents == null) {
     		 target_null();
     	 }
+    	 int index = targetContinents.indexOf(c.getContinent());
+         if (index == -1 && c.getContinent().getOwner() == player) {
+             break;
+         }
+         int indexOther = targetContinents.indexOf(n.getContinent());
         other_if();
         
     }
@@ -2685,6 +2686,18 @@ public class AIDomination extends AISubmissive {
          }
     }
     
+    public small_multiplayer() {
+    	ps.defenseValue = 5*noArmies/4 + noArmies%4 + player2.getNoTerritoriesOwned();
+        ps.p = player2;
+        if (i == 0) {
+            g.me = ps;
+        } else {
+            g.orderedPlayers.add(ps);
+        }
+        ps.playerValue += ps.attackValue + ((game.getMaxDefendDice() == 2 && !isIncreasingSet())?1:game.getMaxDefendDice()>2?3:2)*ps.defenseValue;
+        attackOrder++;
+    }
+    
     public get_players() {
 
         Player player2 = players.get((index + i)%players.size());
@@ -2713,15 +2726,7 @@ public class AIDomination extends AISubmissive {
         ps.attackValue = attack;
         ps.attackOrder = attackOrder;
         //use a small multiplier for the defensive value
-        ps.defenseValue = 5*noArmies/4 + noArmies%4 + player2.getNoTerritoriesOwned();
-        ps.p = player2;
-        if (i == 0) {
-            g.me = ps;
-        } else {
-            g.orderedPlayers.add(ps);
-        }
-        ps.playerValue += ps.attackValue + ((game.getMaxDefendDice() == 2 && !isIncreasingSet())?1:game.getMaxDefendDice()>2?3:2)*ps.defenseValue;
-        attackOrder++;
+        small_multiplier();
     
     }
     
