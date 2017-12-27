@@ -2415,12 +2415,8 @@ public class AIDomination extends AISubmissive {
         }
     
     }
-    
-    public if_check_operations() {
-    	 if (targetContinents == null) {
-    		 target_null();
-    	 }
-         int index = targetContinents.indexOf(c.getContinent());
+    public other_if() {
+    	 int index = targetContinents.indexOf(c.getContinent());
          if (index == -1 && c.getContinent().getOwner() == player) {
              break;
          }
@@ -2430,6 +2426,15 @@ public class AIDomination extends AISubmissive {
              return getMoveCommand(c, n, toSend);
          }
     }
+    
+    public if_check_operations() {
+    	 if (targetContinents == null) {
+    		 target_null();
+    	 }
+        other_if();
+        
+    }
+    
     public check_cooperations() {
 
         Country n = (Country)c.getNeighbours().get(j);
