@@ -2120,6 +2120,16 @@ public class AIDomination extends AISubmissive {
     
     }
     
+    private void if_target() {
+    	if ((!isIncreasingSet() || game.getNewCardState() < gameState.me.defenseValue/8) && (!attack || player2.getTerritoriesOwned().size() > 1) && !game.getCards().isEmpty() && cardCount < 3 && (game.getCardMode()==RiskGame.CARD_ITALIANLIKE_SET||(cardCount+player.getCards().size()<RiskGame.MAX_CARDS))) {
+            divisor+=(.5*Math.max(0, isIncreasingSet()?2:4 - cardCount));
+        }
+
+        if (!isTarget && ps.defenseValue > gameState.me.armies/divisor + player.getExtraArmies()) {
+            continue;
+        }
+    }
+    
     
     private void elimination_target() {
 
@@ -2133,13 +2143,7 @@ public class AIDomination extends AISubmissive {
         boolean isTarget = gameState.targetPlayers.size() > 1 && gameState.targetPlayers.get(0) == player2;
         double divisor = 1;
         int cardCount = player2.getCards().size();
-        if ((!isIncreasingSet() || game.getNewCardState() < gameState.me.defenseValue/8) && (!attack || player2.getTerritoriesOwned().size() > 1) && !game.getCards().isEmpty() && cardCount < 3 && (game.getCardMode()==RiskGame.CARD_ITALIANLIKE_SET||(cardCount+player.getCards().size()<RiskGame.MAX_CARDS))) {
-            divisor+=(.5*Math.max(0, isIncreasingSet()?2:4 - cardCount));
-        }
-
-        if (!isTarget && ps.defenseValue > gameState.me.armies/divisor + player.getExtraArmies()) {
-            continue;
-        }
+        if_target();
 
         List<Country> targetCountries = player2.getTerritoriesOwned();
         EliminationTarget et = new EliminationTarget();
