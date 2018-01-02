@@ -262,9 +262,9 @@ public class CollisionPhysics {
       if (sol1 > 0 && sol2 > 0) {
          return (float)Math.min(sol1, sol2);
       } else if (sol1 > 0) {
-         return (float)sol1;
+         return (double)sol1;
       } else if (sol2 > 0) {
-         return (float)sol2;
+         return (double)sol2;
       } else {
          return Float.MAX_VALUE;
       }
@@ -764,9 +764,9 @@ public class CollisionPhysics {
       if (sol1 > 0 && sol2 > 0) {
          return (float)Math.min(sol1, sol2);
       } else if (sol1 > 0) {
-         return (float)sol1;
+         return (double)sol1;
       } else if (sol2 > 0) {
-         return (float)sol2;
+         return (double)sol2;
       } else {
          // No positive t solution. Set detected collision time to infinity.
          return Float.MAX_VALUE;
