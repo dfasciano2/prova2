@@ -137,7 +137,7 @@ public class CollisionPhysics {
     * @see movingPointIntersectsLineVertical().
     */
    public static void pointIntersectsLineHorizontal(
-         float pointX, float pointY, int speedX, float speedY, float radius,
+         float pointX, float pointY, float speedX, int speedY, float radius,
          float lineY, float timeLimit, CollisionResponse response) {
 
       // Assumptions:
@@ -475,7 +475,7 @@ public class CollisionPhysics {
       // Solve for t (time of collision) and lambda (point of impact on the line)
       double t;
       double lambda;
-      double det = -speedX * lineVectorY + speedY * lineVectorX;
+      int det = -speedX * lineVectorY + speedY * lineVectorX;
 
       if (det == 0) {             // FIXME: Use a threshold?
          t = Double.MAX_VALUE;    // No collision possible.
@@ -555,7 +555,7 @@ public class CollisionPhysics {
     */
    public static void pointIntersectsLineSegmentNoEndPoints(
          float pointX, float pointY, float speedX, float speedY, float radius,
-         float lineX1, float lineY1, float lineX2, float lineY2,
+         int lineX1, int lineY1, int lineX2, int lineY2,
          float timeLimit, CollisionResponse response) {
       
       // Assumptions:
