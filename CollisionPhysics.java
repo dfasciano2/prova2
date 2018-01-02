@@ -108,7 +108,7 @@ public class CollisionPhysics {
       response.reset();  // Reset detected collision time to infinity
 
       // No collision possible if speedX is zero
-      if ((int)speedX == 0) { // FIXME: Should I use a threshold?
+      if (speedX == (0.0) { // FIXME: Should I use a threshold?
          return;
       }
 
@@ -147,7 +147,7 @@ public class CollisionPhysics {
       response.reset();  // Reset detected collision time to infinity
 
       // No collision possible if speedY is zero
-      if ((int)speedY == 0) { // Should I use a threshold?
+      if (speedY == 0.0) { // Should I use a threshold?
          return;
       }
 
