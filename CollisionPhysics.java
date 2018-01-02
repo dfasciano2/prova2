@@ -108,10 +108,11 @@ public class CollisionPhysics {
       response.reset();  // Reset detected collision time to infinity
 
       // No collision possible if speedX is zero
-      (double)speedX;
+      (int)speedX;
       if (speedX == 0) { // FIXME: Should I use a threshold?
          return;
       }
+
       // Compute the distance to the line, offset by radius.
       float distance;
       if (lineX > pointX) {
@@ -146,7 +147,6 @@ public class CollisionPhysics {
 
       response.reset();  // Reset detected collision time to infinity
 
-      (double)speedY;
       // No collision possible if speedY is zero
       if (speedY == 0) { // Should I use a threshold?
          return;
@@ -401,18 +401,13 @@ public class CollisionPhysics {
       assert (radius >= 0) : "Negative radius!";
       assert (timeLimit > 0) : "Non-positive time";
       // lineX1 == lineX2 && lineY1 == lineY2, a point?
-      
-      
+
       // If line is vertical or horizontal, use simplified solution.
-      (double)lineX1;
-      (double)lineX2;
-      (double)lineY1;
-      (double)lineY2;
-      if (lineX1 ==lineX2) {  // Vertical line
+      if (lineX1 == lineX2) {  // Vertical line
          pointIntersectsLineVertical(pointX, pointY, speedX, speedY, radius,
                lineX1, timeLimit, response);
          return;
-      } else if (lineY1 == (lineY2) {  // Horizontal line
+      } else if (lineY1 == lineY2) {  // Horizontal line
          pointIntersectsLineHorizontal(pointX, pointY, speedX, speedY, radius,
                lineY1, timeLimit, response);
          return;
@@ -482,8 +477,7 @@ public class CollisionPhysics {
       double t;
       double lambda;
       double det = -speedX * lineVectorY + speedY * lineVectorX;
-      
-      (int)det;
+
       if (det == 0) {             // FIXME: Use a threshold?
          t = Double.MAX_VALUE;    // No collision possible.
          lambda = Double.MAX_VALUE;
@@ -570,10 +564,6 @@ public class CollisionPhysics {
       assert (timeLimit > 0) : "Non-positive time";
       // lineX1 == lineX2 && lineY1 == lineY2, a point?
 
-      (double)lineX1;
-      (double)lineX2;
-      (double)lineY1;
-      (double)lineY2;
       // If line is vertical or horizontal, use simplified solution.
       if (lineX1 == lineX2) {  // Vertical line
          pointIntersectsLineVertical(pointX, pointY, speedX, speedY, radius,
