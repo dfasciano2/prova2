@@ -571,13 +571,10 @@ public class CollisionPhysics {
       assert (timeLimit > 0) : "Non-positive time";
       // lineX1 == lineX2 && lineY1 == lineY2, a point?
       
-      int linex1= (int)lineX1;
-      int linex2= (int)lineX2;
-      int liney1= (int)lineY1;
-      int liney2= (int)lineY2;
+  
       
       // If line is vertical or horizontal, use simplified solution.
-      if (linex1 == linex2) {  // Vertical line
+      if ((int)linex1 == (int)linex2) {  // Vertical line
          pointIntersectsLineVertical(pointX, pointY, speedX, speedY, radius,
                lineX1, timeLimit, response);
          // Need to confirm that the point of impact is within the line-segment
