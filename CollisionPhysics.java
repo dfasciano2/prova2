@@ -108,7 +108,8 @@ public class CollisionPhysics {
       response.reset();  // Reset detected collision time to infinity
 
       // No collision possible if speedX is zero
-      if (speedX == (0.0) { // FIXME: Should I use a threshold?
+      (int)speedX;
+      if (speedX == 0) { // FIXME: Should I use a threshold?
          return;
       }
 
@@ -146,8 +147,9 @@ public class CollisionPhysics {
 
       response.reset();  // Reset detected collision time to infinity
 
+      (int)speedY;
       // No collision possible if speedY is zero
-      if (speedY == 0.0) { // Should I use a threshold?
+      if (speedY == 0) { // Should I use a threshold?
          return;
       }
 
@@ -400,13 +402,18 @@ public class CollisionPhysics {
       assert (radius >= 0) : "Negative radius!";
       assert (timeLimit > 0) : "Non-positive time";
       // lineX1 == lineX2 && lineY1 == lineY2, a point?
-
+      
+      
       // If line is vertical or horizontal, use simplified solution.
-      if ((int)lineX1 ==(int) lineX2) {  // Vertical line
+      (int)lineX1;
+      (int)lineX2;
+      (int)lineY1;
+      (int)lineY2;
+      if lineX1 ==lineX2) {  // Vertical line
          pointIntersectsLineVertical(pointX, pointY, speedX, speedY, radius,
                lineX1, timeLimit, response);
          return;
-      } else if ((int)lineY1 == ((int)lineY2) {  // Horizontal line
+      } else if (lineY1 == (lineY2) {  // Horizontal line
          pointIntersectsLineHorizontal(pointX, pointY, speedX, speedY, radius,
                lineY1, timeLimit, response);
          return;
@@ -476,8 +483,9 @@ public class CollisionPhysics {
       double t;
       double lambda;
       double det = -speedX * lineVectorY + speedY * lineVectorX;
-
-      if ((int)det == 0) {             // FIXME: Use a threshold?
+      
+      (int)det;
+      if (det == 0) {             // FIXME: Use a threshold?
          t = Double.MAX_VALUE;    // No collision possible.
          lambda = Double.MAX_VALUE;
       }
@@ -563,15 +571,19 @@ public class CollisionPhysics {
       assert (timeLimit > 0) : "Non-positive time";
       // lineX1 == lineX2 && lineY1 == lineY2, a point?
 
+      (int)lineX1;
+      (int)lineX2;
+      (int)lineY1;
+      (int)lineY2;
       // If line is vertical or horizontal, use simplified solution.
-      if ((int)lineX1 == (int)lineX2) {  // Vertical line
+      if (lineX1 == lineX2) {  // Vertical line
          pointIntersectsLineVertical(pointX, pointY, speedX, speedY, radius,
                lineX1, timeLimit, response);
          // Need to confirm that the point of impact is within the line-segment
          double impactY = response.getImpactY(pointY, speedY);
          checkImpactLine(impactY,lineY2,lineY1,response);
          return;
-      } else if ((int)lineY1 == (int)lineY2) {  // Horizontal line
+      } else if (lineY1 == lineY2) {  // Horizontal line
          pointIntersectsLineHorizontal(pointX, pointY, speedX,
               speedY, radius, lineY1, timeLimit, response);
          // Need to confirm that the point of impact is within the line-segment
