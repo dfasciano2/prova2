@@ -108,11 +108,10 @@ public class CollisionPhysics {
       response.reset();  // Reset detected collision time to infinity
 
       // No collision possible if speedX is zero
-      (int)speedX;
+      (double)speedX;
       if (speedX == 0) { // FIXME: Should I use a threshold?
          return;
       }
-
       // Compute the distance to the line, offset by radius.
       float distance;
       if (lineX > pointX) {
@@ -147,7 +146,7 @@ public class CollisionPhysics {
 
       response.reset();  // Reset detected collision time to infinity
 
-      (int)speedY;
+      (double)speedY;
       // No collision possible if speedY is zero
       if (speedY == 0) { // Should I use a threshold?
          return;
@@ -405,11 +404,11 @@ public class CollisionPhysics {
       
       
       // If line is vertical or horizontal, use simplified solution.
-      (int)lineX1;
-      (int)lineX2;
-      (int)lineY1;
-      (int)lineY2;
-      if lineX1 ==lineX2) {  // Vertical line
+      (double)lineX1;
+      (double)lineX2;
+      (double)lineY1;
+      (double)lineY2;
+      if (lineX1 ==lineX2) {  // Vertical line
          pointIntersectsLineVertical(pointX, pointY, speedX, speedY, radius,
                lineX1, timeLimit, response);
          return;
@@ -571,10 +570,10 @@ public class CollisionPhysics {
       assert (timeLimit > 0) : "Non-positive time";
       // lineX1 == lineX2 && lineY1 == lineY2, a point?
 
-      (int)lineX1;
-      (int)lineX2;
-      (int)lineY1;
-      (int)lineY2;
+      (double)lineX1;
+      (double)lineX2;
+      (double)lineY1;
+      (double)lineY2;
       // If line is vertical or horizontal, use simplified solution.
       if (lineX1 == lineX2) {  // Vertical line
          pointIntersectsLineVertical(pointX, pointY, speedX, speedY, radius,
