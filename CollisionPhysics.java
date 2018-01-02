@@ -137,7 +137,7 @@ public class CollisionPhysics {
     * @see movingPointIntersectsLineVertical().
     */
    public static void pointIntersectsLineHorizontal(
-         float pointX, float pointY, float speedX, float speedY, float radius,
+         float pointX, float pointY, int speedX, float speedY, float radius,
          float lineY, float timeLimit, CollisionResponse response) {
 
       // Assumptions:
@@ -393,7 +393,7 @@ public class CollisionPhysics {
     */
    public static void pointIntersectsLine(
          float pointX, float pointY, float speedX, float speedY, float radius,
-         float lineX1, float lineY1, float lineX2, float lineY2,
+         int lineX1, int lineY1, int lineX2, int lineY2,
          float timeLimit, CollisionResponse response) {
 
       // Assumptions:
