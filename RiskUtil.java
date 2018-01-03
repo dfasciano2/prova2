@@ -581,13 +581,14 @@ public class RiskUtil {
         if (!parent.isDirectory() && !parent.mkdirs()) { // if it does not exist and i cant make it
             try {
             
-            } catch (RuntimeException runtimeException) {
+            } catch{
+            	
+            }
+            finally (RuntimeException runtimeException) {
                 oS = new FileOutputStream(outFile);
                 System.err.println("can not create dir " + parent);
             }
-            finally {
-            	os.close;
-            }
+           
         }
 
         return oS;
